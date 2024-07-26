@@ -15,7 +15,7 @@ xmlhttp.onreadystatechange = () => {
         if (editorElement) {
             const pageToEditor = localStorage.getItem('pageToEditor');
             if (pageToEditor) {
-                fetch(`http://localhost:3000/api/${pageToEditor}`)
+                fetch(`http://localhost:3000/api/pages/${pageToEditor}`)
                     .then(response => response.text())
                     .then(data => {
                         let editor = ace.edit(editorElement);
@@ -31,7 +31,7 @@ xmlhttp.onreadystatechange = () => {
 }
 
 function changeComponent(page, fromEditor=false, pageToEditor=null) {
-    xmlhttp.open('GET', 'http://localhost:3000/api/'+page, true)
+    xmlhttp.open('GET', 'http://localhost:3000/api/pages/'+page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
     
