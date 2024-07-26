@@ -1,15 +1,22 @@
+function getNavbarOptions() {
+    fetch(`http://localhost:3000/api/pages/navbarOptions`)
+    .then(response => response.text())
+    .then(res => {
+        let navContainer = document.querySelector('ul.navbar-nav')
+        navContainer.innerHTML = res
+        executeScript(navContainer)
+    })
+}
+window.onload = () => {
+    getNavbarOptions()
+}
+
 xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
     if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
         let main = document.querySelector('main')
         main.innerHTML = xmlhttp.responseText
-
-        const scripts = main.querySelectorAll('script');
-        scripts.forEach(script => {
-            const newScript = document.createElement('script');
-            newScript.textContent = script.textContent;
-            document.body.appendChild(newScript).parentNode.removeChild(newScript);
-        });
+        executeScript(main)
 
         let editorElement = document.querySelector('#editor');
         if (editorElement) {
@@ -31,19 +38,28 @@ xmlhttp.onreadystatechange = () => {
 }
 
 function changeComponent(page, fromEditor=false, pageToEditor=null) {
-    xmlhttp.open('GET', 'http://localhost:3000/api/pages/'+page, true)
+    xmlhttp.open('GET', 'http://localhost:3000/api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
     
     if(fromEditor) {
         localStorage.setItem('pageToEditor', pageToEditor)
     }
-
-
-
 }
 
-
+function executeScript(node) {
+    const scripts = node.querySelectorAll('script');
+    scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+            newScript.src = script.src;
+        } else {
+            newScript.textContent = script.textContent;
+        }
+        document.body.appendChild(newScript);
+        script.parentNode.removeChild(script);
+    });
+}
 
 // 0 (UNSENT): The XMLHttpRequest object has been created, but the open() method hasn't been called yet.
 // 1 (OPENED): The open() method has been called. This is the state right after calling open() but before calling send().

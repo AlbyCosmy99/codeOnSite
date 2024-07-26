@@ -21,6 +21,8 @@
       .then(res => {
         let main = document.querySelector('main')
         main.innerHTML = xmlhttp.responseText
+
+        getNavbarOptions()
       })
 
     }
