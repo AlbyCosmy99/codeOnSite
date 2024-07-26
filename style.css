@@ -6,3 +6,7 @@
 nav button {
     background-color: lightgreen;
 }
+
+#navbarSupportedContent {
+    overflow-y: auto;
+}
