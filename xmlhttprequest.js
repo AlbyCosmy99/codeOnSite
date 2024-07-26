@@ -18,6 +18,7 @@ function changeComponent(page) {
     xmlhttp.open('GET', 'http://localhost:3000/api/'+page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
+    
 }
 
 
