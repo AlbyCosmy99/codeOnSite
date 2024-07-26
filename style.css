@@ -1,0 +1,8 @@
+.content {
+    min-height: 100vh;
+    flex: 1;
+}
+
+nav button {
+    background-color: lightgreen;
+}
