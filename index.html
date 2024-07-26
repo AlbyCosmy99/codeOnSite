@@ -22,7 +22,7 @@
                       <button onclick="changeComponent('home')">Home</button>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><button class="dropdown-item" onclick="changeComponent('htmlEditor')">Customize</button></li>
+                      <li><button class="dropdown-item" onclick="changeComponent('htmlEditor', true, 'home')">Customize</button></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown" style="background-color: green;">
@@ -30,7 +30,7 @@
                       <button onclick="changeComponent('page1')">Page1</button>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Customize</a></li>
+                      <li><button class="dropdown-item" onclick="changeComponent('htmlEditor', true, 'page1')">Customize</button></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown" style="background-color: green;">
@@ -70,5 +70,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
 </body>
 </html>
+
 
 

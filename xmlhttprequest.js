@@ -1,7 +1,6 @@
 xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
     if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
-        console.log(xmlhttp.responseText)
         let main = document.querySelector('main')
         main.innerHTML = xmlhttp.responseText
 
@@ -11,14 +10,37 @@ xmlhttp.onreadystatechange = () => {
             newScript.textContent = script.textContent;
             document.body.appendChild(newScript).parentNode.removeChild(newScript);
         });
+
+        let editorElement = document.querySelector('#editor');
+        if (editorElement) {
+            const pageToEditor = localStorage.getItem('pageToEditor');
+            if (pageToEditor) {
+                fetch(`http://localhost:3000/api/${pageToEditor}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        let editor = ace.edit(editorElement);
+                        editor.setValue(data, -1);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching editor content:', error);
+                    });
+            }
+        }
+
     }
 }
 
-function changeComponent(page) {
+function changeComponent(page, fromEditor=false, pageToEditor=null) {
     xmlhttp.open('GET', 'http://localhost:3000/api/'+page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
     
+    if(fromEditor) {
+        localStorage.setItem('pageToEditor', pageToEditor)
+    }
+
+
+
 }
 
 
@@ -28,3 +50,4 @@ function changeComponent(page) {
 // 2 (HEADERS_RECEIVED): The send() method has been called, and the response headers have been received.
 // 3 (LOADING): The response is being downloaded; responseText holds partial data.
 // 4 (DONE): The operation is complete. This means the entire response has been received.
+
