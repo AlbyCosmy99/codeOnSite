@@ -1,5 +1,6 @@
 window.onload = () => {
     getNavbarOptions()
+    changeComponent('welcome')
 }
 
 xmlhttp = new XMLHttpRequest()
