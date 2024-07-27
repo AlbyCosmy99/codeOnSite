@@ -48,10 +48,10 @@
             const newScript = document.createElement('script');
             newScript.textContent = script.textContent;
             document.body.appendChild(newScript).parentNode.removeChild(newScript);
-
-            sessionStorage.removeItem('currentCode')
-            clearInterval(intervalCurrentCode)
-          });      
+          });
+          
+          sessionStorage.removeItem('currentCode')
+          clearInterval(intervalCurrentCode)
         })
       })
     }
