@@ -18,14 +18,8 @@ let xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
     if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
         let main = document.querySelector('main')
-        if(sessionStorage.getItem('currentCode')) {
-            main.innerHTML = sessionStorage.getItem('currentCode')
-        }
-        else {
-            main.innerHTML = xmlhttp.responseText
-        }
+        main.innerHTML = xmlhttp.responseText
         executeScript(main)
-
         manageCodeEditor()
     }
 }
