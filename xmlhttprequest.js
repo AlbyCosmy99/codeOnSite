@@ -2,7 +2,15 @@ import BACKEND from './consts.js'
 
 window.onload = () => {
     getNavbarOptions()
-    changeComponent('welcome')
+
+    let currentPage = sessionStorage.getItem('currentPage')
+    if(currentPage) {
+        changeComponent(currentPage)
+    }
+    else {
+        changeComponent('welcome')
+    }
+    
 }
 
 let xmlhttp = new XMLHttpRequest()
