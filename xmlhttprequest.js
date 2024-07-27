@@ -14,8 +14,7 @@ window.onload = () => {
     else {
         changeComponent('welcome')
         getNavbarOptions()
-    }
-    
+    } 
 }
 
 let xmlhttp = new XMLHttpRequest()
@@ -54,11 +53,15 @@ export function getNavbarOptions(isEdit=false) {
 }
 
 export function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
+    let checkPage = sessionStorage.getItem('currentPage')
+
     xmlhttp.open('GET', BACKEND + 'api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
 
-    sessionStorage.setItem('currentPage', page)
+    if(checkPage != 'htmlEditor' && page != 'welcomeEdit') {
+        sessionStorage.setItem('currentPage', page)
+    }
     
     if(!isEdit) {
         getNavbarOptions()
