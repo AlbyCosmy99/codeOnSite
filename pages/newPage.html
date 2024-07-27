@@ -5,25 +5,28 @@
   </form>
 </div>
 <script>
-  function createPage(e) {
-    e.preventDefault()
-    let pageName = document.querySelector('#pageName').value
-    fetch('http://localhost:3000/api/pages/' + pageName, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          isNavbarOption: true
+  import('./consts.js').then(module => {
+    const BACKEND = module.default 
+
+    function createPage(e) {
+      e.preventDefault()
+      let pageName = document.querySelector('#pageName').value
+      fetch(BACKEND + 'api/pages/' + pageName, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            isNavbarOption: true
+        })
       })
-    })
-    .then(res => res.text())
-    .then(res => {
-      let main = document.querySelector('main')
-      main.innerHTML = res
+      .then(res => res.text())
+      .then(res => {
+        let main = document.querySelector('main')
+        main.innerHTML = res
 
-      getNavbarOptions()
-    })
-
-  }
+        getNavbarOptions()
+      })
+    }
+  })
 </script>
