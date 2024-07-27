@@ -53,15 +53,9 @@ export function getNavbarOptions(isEdit=false) {
 }
 
 export function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
-    let checkPage = sessionStorage.getItem('currentPage')
-
     xmlhttp.open('GET', BACKEND + 'api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
-
-    if(checkPage != 'htmlEditor' && page != 'welcomeEdit') {
-        sessionStorage.setItem('currentPage', page)
-    }
     
     if(!isEdit) {
         getNavbarOptions()
