@@ -9,7 +9,7 @@
                 <li class="nav-item" style="background-color: green;">
                     <a class="nav-link d-flex flex-column justify-content-center align-items-center">
                         <button onclick="changeComponent('${elem.name}')">${elem.name}</button>
-                        <button  id="selectButton" style="font-size: 0.6rem; background-color: orange;" onclick="selectOption(event, '${elem.name}')">SELECT</button>
+                        <button id="selectButton" style="font-size: 0.6rem; background-color: orange;margin-top: 1px" onclick="selectOption(event, '${elem.name}')">SELECT</button>
                     </a>
                 </li>
                 `
@@ -26,4 +26,4 @@
         })
         e.target.style.backgroundColor = 'red';
     }
-  </script>
+</script>
