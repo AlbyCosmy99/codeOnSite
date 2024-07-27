@@ -18,7 +18,7 @@
   
       const html = editor.getValue();
   
-      const response = await fetch('http://localhost:3000/api/pages' + localStorage.getItem('pageToEditor'), {
+      const response = await fetch('http://localhost:3000/api/pages/' + localStorage.getItem('pageToEditor'), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
