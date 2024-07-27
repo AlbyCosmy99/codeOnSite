@@ -17,13 +17,7 @@
     });
 
     setInterval(() => {
-      let currentCode = sessionStorage.getItem('currentCode')
-      if(currentCode) {
-
-      }
-      else {
-        
-      }
+      sessionStorage.setItem('currentCode', editor.getValue())
     },1000)
   
     function sendHtml(e) {
