@@ -1,15 +1,30 @@
-function getNavbarOptions() {
-    fetch(`http://localhost:3000/api/pages/navbarOptions`)
+function getNavbarOptions(isEdit=false) {
+    if(isEdit) {
+        fetch(`http://localhost:3000/api/pages/navbarEditOptions`)
+        .then(response => response.text())
+        .then(res => {
+            renderOptions(res)
+        })
+        changeComponent('welcomeEdit', false, null, isEdit)
+    }
+    else {
+        fetch(`http://localhost:3000/api/pages/navbarOptions`)
     .then(response => response.text())
-    .then(res => {
+        .then(res => {
+            renderOptions(res)
+        })
+    }
+
+    function renderOptions(res) {
         let navContainer = document.querySelector('ul.navbar-nav')
         navContainer.innerHTML = res
         executeScript(navContainer)
-    })
+    }
 }
-// window.onload = () => {
-//     getNavbarOptions()
-// }
+
+window.onload = () => {
+    getNavbarOptions()
+}
 
 xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
@@ -18,29 +33,18 @@ xmlhttp.onreadystatechange = () => {
         main.innerHTML = xmlhttp.responseText
         executeScript(main)
 
-        let editorElement = document.querySelector('#editor');
-        if (editorElement) {
-            const pageToEditor = localStorage.getItem('pageToEditor');
-            if (pageToEditor) {
-                fetch(`http://localhost:3000/api/pages/${pageToEditor}`)
-                    .then(response => response.text())
-                    .then(data => {
-                        let editor = ace.edit(editorElement);
-                        editor.setValue(data, -1);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching editor content:', error);
-                    });
-            }
-        }
-
+        manageCodeEditor()
     }
 }
 
-function changeComponent(page, fromEditor=false, pageToEditor=null) {
+function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
     xmlhttp.open('GET', 'http://localhost:3000/api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
+    
+    if(!isEdit) {
+        getNavbarOptions()
+    }
     
     if(fromEditor) {
         localStorage.setItem('pageToEditor', pageToEditor)
@@ -59,6 +63,24 @@ function executeScript(node) {
         document.body.appendChild(newScript);
         script.parentNode.removeChild(script);
     });
+}
+
+function manageCodeEditor() {
+    let editorElement = document.querySelector('#editor');
+    if (editorElement) {
+        const pageToEditor = localStorage.getItem('pageToEditor');
+        if (pageToEditor) {
+            fetch(`http://localhost:3000/api/pages/${pageToEditor}`)
+                .then(response => response.text())
+                .then(data => {
+                    let editor = ace.edit(editorElement);
+                    editor.setValue(data, -1);
+                })
+                .catch(error => {
+                    console.error('Error fetching editor content:', error);
+                });
+        }
+    }
 }
 
 // 0 (UNSENT): The XMLHttpRequest object has been created, but the open() method hasn't been called yet.

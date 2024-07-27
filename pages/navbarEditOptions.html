@@ -9,7 +9,7 @@
                 <li class="nav-item" style="background-color: green;">
                     <a class="nav-link d-flex flex-column justify-content-center align-items-center">
                         <button onclick="changeComponent('${elem.name}')">${elem.name}</button>
-                        <button  id="selectedButton" style="font-size: 0.6rem; background-color: orange;" onclick="selectOption('${elem.name}')">SELECT</button>
+                        <button  id="selectButton" style="font-size: 0.6rem; background-color: orange;" onclick="selectOption(event, '${elem.name}')">SELECT</button>
                     </a>
                 </li>
                 `
@@ -19,8 +19,11 @@
 
     renderNavbarOptions()
 
-    function selectOption(page) {
-        let selectBtn = document.querySelector('#selectedButton')
-        selectBtn.sty
+    function selectOption(e, page) {
+        let navbarBtns = document.querySelectorAll('ul.navbar-nav #selectButton')
+        navbarBtns.forEach(elem => {
+            elem.style.backgroundColor = 'orange'
+        })
+        e.target.style.backgroundColor = 'red';
     }
   </script>
