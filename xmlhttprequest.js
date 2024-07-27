@@ -44,6 +44,8 @@ export function changeComponent(page, fromEditor=false, pageToEditor=null, isEdi
     xmlhttp.open('GET', BACKEND + 'api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
+
+    sessionStorage.setItem('currentPage', page)
     
     if(!isEdit) {
         getNavbarOptions()
