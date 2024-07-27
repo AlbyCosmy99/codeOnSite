@@ -1,14 +1,19 @@
 import BACKEND from './consts.js'
 
 window.onload = () => {
-    getNavbarOptions()
-
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
         changeComponent(currentPage)
+        if(currentPage === 'htmlEditor') {
+            getNavbarOptions(true)
+        }
+        else {
+            getNavbarOptions()
+        }
     }
     else {
         changeComponent('welcome')
+        getNavbarOptions()
     }
     
 }
