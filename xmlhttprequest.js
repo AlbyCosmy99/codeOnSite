@@ -4,6 +4,12 @@ window.onload = () => {
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
         changeComponent(currentPage)
+        if(currentPage === 'htmlEditor') {
+            getNavbarOptions(true)
+        }
+        else {
+            getNavbarOptions()
+        }
     }
     else {
         changeComponent('welcome')
