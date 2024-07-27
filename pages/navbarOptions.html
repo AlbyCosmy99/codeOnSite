@@ -1,5 +1,5 @@
 <script>
-    fetch('http://localhost:3000/api/navbarOptions/names')
+    fetch(BACKEND + 'api/navbarOptions/names')
     .then(res => res.json())
     .then(res => {
         let navbarOptions = document.querySelector('ul.navbar-nav')
@@ -13,4 +13,4 @@
             `
         }).join('')
     })
-  </script>
+</script>

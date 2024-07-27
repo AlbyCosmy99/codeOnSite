@@ -1,3 +1,5 @@
+import BACKEND from './consts.js'
+
 window.onload = () => {
     getNavbarOptions()
     changeComponent('welcome')
@@ -16,7 +18,7 @@ xmlhttp.onreadystatechange = () => {
 
 function getNavbarOptions(isEdit=false) {
     if(isEdit) {
-        fetch(`http://localhost:3000/api/pages/navbarEditOptions`)
+        fetch(BACKEND + `api/pages/navbarEditOptions`)
         .then(response => response.text())
         .then(res => {
             renderOptions(res)
@@ -24,7 +26,7 @@ function getNavbarOptions(isEdit=false) {
         changeComponent('welcomeEdit', false, null, isEdit)
     }
     else {
-        fetch(`http://localhost:3000/api/pages/navbarOptions`)
+        fetch(BACKEND + `api/pages/navbarOptions`)
     .then(response => response.text())
         .then(res => {
             renderOptions(res)
@@ -39,7 +41,7 @@ function getNavbarOptions(isEdit=false) {
 }
 
 function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
-    xmlhttp.open('GET', 'http://localhost:3000/api/pages/' + page, true)
+    xmlhttp.open('GET', BACKEND + 'pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
     
@@ -71,7 +73,7 @@ function manageCodeEditor() {
     if (editorElement) {
         const pageToEditor = localStorage.getItem('pageToEditor');
         if (pageToEditor) {
-            fetch(`http://localhost:3000/api/pages/${pageToEditor}`)
+            fetch(BACKEND + `api/pages/${pageToEditor}`)
                 .then(response => response.text())
                 .then(data => {
                     let editor = ace.edit(editorElement);
