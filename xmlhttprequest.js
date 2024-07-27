@@ -30,7 +30,7 @@ export function getNavbarOptions(isEdit=false, cancel = false) {
             renderOptions(res)
         })
         
-        if(sessionStorage.getItem('currentPage') != 'htmlEditor' && !cancel) {
+        if(sessionStorage.getItem('currentPage') != 'htmlEditor' || cancel) {
             changeComponent('welcomeEdit', false, null, isEdit)
         }
     }
