@@ -8,7 +8,8 @@
   import('./consts.js').then(module => {
     const BACKEND = module.default 
 
-    function createPage(e) {
+    window.createPage = function createPage(e) {
+      console.log('b')
       e.preventDefault()
       let pageName = document.querySelector('#pageName').value
       fetch(BACKEND + 'api/pages/' + pageName, {
@@ -29,4 +30,7 @@
       })
     }
   })
+  .catch(err => {
+    console.log('error in newPage. Cannot import BACKEND url.')
+  }) 
 </script>
