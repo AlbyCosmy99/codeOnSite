@@ -16,31 +16,36 @@
         autoScrollEditorIntoView: true,
     });
   
-    async function sendHtml(e) {
+    function sendHtml(e) {
       e.preventDefault();
   
       const html = editor.getValue();
   
-      const response = await fetch('http://localhost:3000/api/pages/' + localStorage.getItem('pageToEditor'), {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "html": html
+      import('./consts.js').then(module => {
+        const BACKEND = module.default
+
+        fetch('http://localhost:3000/api/pages/' + localStorage.getItem('pageToEditor'), {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "html": html
+          })
         })
-      });
-  
-      const result = await response.text();
-      let main = document.querySelector('main');
-      main.innerHTML = result;
-  
-      const scripts = main.querySelectorAll('script');
-      scripts.forEach((script) => {
-        const newScript = document.createElement('script');
-        newScript.textContent = script.textContent;
-        document.body.appendChild(newScript).parentNode.removeChild(newScript);
-      });
+        .then(res => res.text())
+        .then(res => {
+          let main = document.querySelector('main');
+          main.innerHTML = res;
+
+          const scripts = main.querySelectorAll('script');
+          scripts.forEach((script) => {
+            const newScript = document.createElement('script');
+            newScript.textContent = script.textContent;
+            document.body.appendChild(newScript).parentNode.removeChild(newScript);
+          });      
+        })
+      })
     }
-  </script>
+</script>
   

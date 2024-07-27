@@ -16,7 +16,7 @@ xmlhttp.onreadystatechange = () => {
     }
 }
 
-function getNavbarOptions(isEdit=false) {
+export function getNavbarOptions(isEdit=false) {
     if(isEdit) {
         fetch(BACKEND + `api/pages/navbarEditOptions`)
         .then(response => response.text())
