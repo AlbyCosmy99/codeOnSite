@@ -35,11 +35,14 @@ export function getNavbarOptions(isEdit=false) {
         .then(res => {
             renderOptions(res)
         })
-        changeComponent('welcomeEdit', false, null, isEdit)
+        
+        if(sessionStorage.getItem('currentPage') != 'htmlEditor') {
+            changeComponent('welcomeEdit', false, null, isEdit)
+        }
     }
     else {
         fetch(BACKEND + `api/pages/navbarOptions`)
-    .then(response => response.text())
+        .then(response => response.text())
         .then(res => {
             renderOptions(res)
         })
