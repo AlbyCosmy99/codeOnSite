@@ -40,7 +40,7 @@ export function getNavbarOptions(isEdit=false) {
     }
 }
 
-function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
+export function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
     xmlhttp.open('GET', BACKEND + 'api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
@@ -54,7 +54,7 @@ function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false
     }
 }
 
-function executeScript(node) {
+export function executeScript(node) {
     const scripts = node.querySelectorAll('script');
     scripts.forEach(script => {
         const newScript = document.createElement('script');
@@ -68,7 +68,7 @@ function executeScript(node) {
     });
 }
 
-function manageCodeEditor() {
+export function manageCodeEditor() {
     let editorElement = document.querySelector('#editor');
     if (editorElement) {
         const pageToEditor = localStorage.getItem('pageToEditor');
