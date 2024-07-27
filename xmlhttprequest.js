@@ -4,12 +4,6 @@ window.onload = () => {
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
         changeComponent(currentPage)
-        if(currentPage === 'htmlEditor') {
-            getNavbarOptions(true)
-        }
-        else {
-            getNavbarOptions()
-        }
     }
     else {
         changeComponent('welcome')
@@ -28,7 +22,7 @@ xmlhttp.onreadystatechange = () => {
     }
 }
 
-export function getNavbarOptions(isEdit=false) {
+export function getNavbarOptions(isEdit=false, cancel = false) {
     if(isEdit) {
         fetch(BACKEND + `api/pages/navbarEditOptions`)
         .then(response => response.text())
@@ -36,7 +30,7 @@ export function getNavbarOptions(isEdit=false) {
             renderOptions(res)
         })
         
-        if(sessionStorage.getItem('currentPage') != 'htmlEditor') {
+        if(sessionStorage.getItem('currentPage') != 'htmlEditor' && !cancel) {
             changeComponent('welcomeEdit', false, null, isEdit)
         }
     }
