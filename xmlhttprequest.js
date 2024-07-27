@@ -89,16 +89,20 @@ export function manageCodeEditor() {
     let editorElement = document.querySelector('#editor');
     if (editorElement) {
         const pageToEditor = localStorage.getItem('pageToEditor');
-        if (pageToEditor) {
+        if (pageToEditor && !sessionStorage.getItem('currentCode')) {
             fetch(BACKEND + `api/pages/${pageToEditor}`)
-                .then(response => response.text())
-                .then(data => {
-                    let editor = ace.edit(editorElement);
-                    editor.setValue(data, -1);
-                })
-                .catch(error => {
-                    console.error('Error fetching editor content:', error);
-                });
+            .then(response => response.text())
+            .then(data => {
+                let editor = ace.edit(editorElement);
+                editor.setValue(data, -1);
+            })
+            .catch(error => {
+                console.error('Error fetching editor content:', error);
+            });
+        }
+        else {
+            let editor = ace.edit(editorElement);
+            editor.setValue(sessionStorage.getItem('currentCode'), -1);
         }
     }
 }
