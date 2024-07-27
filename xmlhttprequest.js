@@ -5,7 +5,7 @@ window.onload = () => {
     changeComponent('welcome')
 }
 
-xmlhttp = new XMLHttpRequest()
+let xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
     if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
         let main = document.querySelector('main')

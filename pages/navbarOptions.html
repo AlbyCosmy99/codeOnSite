@@ -1,16 +1,20 @@
-<script>
-    fetch(BACKEND + 'api/navbarOptions/names')
-    .then(res => res.json())
-    .then(res => {
-        let navbarOptions = document.querySelector('ul.navbar-nav')
-        navbarOptions.innerHTML = res.map(elem => {
-            return /*html*/`
-            <li class="nav-item" style="background-color: green;">
-                <a class="nav-link">
-                    <button onclick="changeComponent('${elem.name}')">${elem.name}</button>
-                </a>
-            </li>
-            `
-        }).join('')
-    })
+<script type="module">
+    import('./consts.js').then(module => {
+        const BACKEND = module.default;
+
+        fetch(BACKEND + 'api/navbarOptions/names')
+            .then(res => res.json())
+            .then(res => {
+                let navbarOptions = document.querySelector('ul.navbar-nav');
+                navbarOptions.innerHTML = res.map(elem => {
+                    return /*html*/`
+                    <li class="nav-item" style="background-color: green;">
+                        <a class="nav-link">
+                            <button onclick="changeComponent('${elem.name}')">${elem.name}</button>
+                        </a>
+                    </li>
+                    `;
+                }).join('');
+            });
+    });
 </script>
