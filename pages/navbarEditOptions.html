@@ -3,7 +3,14 @@
         fetch('http://localhost:3000/api/navbarOptions/names')
         .then(res => res.json())
         .then(res => {
+            console.log(res)
             let navbarOptions = document.querySelector('ul.navbar-nav')
+            if(res.length === 0) {
+                navbarOptions.innerHTML = /*html*/`
+                    <h6 style="color: green">There are zero pages created.</h6>
+                `
+                return
+            }
             navbarOptions.innerHTML = res.map(elem => {
                 return /*html*/`
                 <li class="nav-item" style="background-color: green;">
