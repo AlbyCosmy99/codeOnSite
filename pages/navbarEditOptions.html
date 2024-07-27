@@ -1,0 +1,26 @@
+<script>
+    function renderNavbarOptions() {
+        fetch('http://localhost:3000/api/navbarOptions/names')
+        .then(res => res.json())
+        .then(res => {
+            let navbarOptions = document.querySelector('ul.navbar-nav')
+            navbarOptions.innerHTML = res.map(elem => {
+                return /*html*/`
+                <li class="nav-item" style="background-color: green;">
+                    <a class="nav-link d-flex flex-column justify-content-center align-items-center">
+                        <button onclick="changeComponent('${elem.name}')">${elem.name}</button>
+                        <button  id="selectedButton" style="font-size: 0.6rem; background-color: orange;" onclick="selectOption('${elem.name}')">SELECT</button>
+                    </a>
+                </li>
+                `
+            }).join('')
+        })
+    }
+
+    renderNavbarOptions()
+
+    function selectOption(page) {
+        let selectBtn = document.querySelector('#selectedButton')
+        selectBtn.sty
+    }
+  </script>

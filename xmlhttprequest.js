@@ -7,9 +7,9 @@ function getNavbarOptions() {
         executeScript(navContainer)
     })
 }
-window.onload = () => {
-    getNavbarOptions()
-}
+// window.onload = () => {
+//     getNavbarOptions()
+// }
 
 xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
