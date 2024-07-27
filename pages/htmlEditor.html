@@ -24,7 +24,7 @@
       import('./consts.js').then(module => {
         const BACKEND = module.default
 
-        fetch('http://localhost:3000/api/pages/' + localStorage.getItem('pageToEditor'), {
+        fetch(BACKEND + 'api/pages/' + localStorage.getItem('pageToEditor'), {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
