@@ -6,7 +6,6 @@
             fetch(BACKEND + 'api/navbarOptions/names')
             .then(res => res.json())
             .then(res => {
-                console.log(res)
                 let navbarOptions = document.querySelector('ul.navbar-nav')
                 if(res.length === 0) {
                     navbarOptions.innerHTML = /*html*/`
@@ -36,7 +35,7 @@
 
         renderNavbarOptions()
 
-        function selectOption(e, page) {
+        window.selectOption = function selectOption(e, page) {
             let navbarBtns = document.querySelectorAll('ul.navbar-nav #selectButton')
             navbarBtns.forEach(elem => {
                 elem.style.backgroundColor = 'orange'
@@ -46,7 +45,7 @@
             changeComponent('htmlEditor',true,page)
         }
 
-        function deleteOption(option) {
+        window.deleteOption = function deleteOption(option) {
             console.log('delete ' + option)
 
             fetch(BACKEND + 'api/pages/' + option, {

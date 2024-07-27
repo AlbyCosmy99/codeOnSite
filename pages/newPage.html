@@ -9,7 +9,6 @@
     const BACKEND = module.default 
 
     window.createPage = function createPage(e) {
-      console.log('b')
       e.preventDefault()
       let pageName = document.querySelector('#pageName').value
       fetch(BACKEND + 'api/pages/' + pageName, {
