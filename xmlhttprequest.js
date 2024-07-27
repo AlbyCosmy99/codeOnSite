@@ -1,3 +1,18 @@
+window.onload = () => {
+    getNavbarOptions()
+}
+
+xmlhttp = new XMLHttpRequest()
+xmlhttp.onreadystatechange = () => {
+    if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
+        let main = document.querySelector('main')
+        main.innerHTML = xmlhttp.responseText
+        executeScript(main)
+
+        manageCodeEditor()
+    }
+}
+
 function getNavbarOptions(isEdit=false) {
     if(isEdit) {
         fetch(`http://localhost:3000/api/pages/navbarEditOptions`)
@@ -19,21 +34,6 @@ function getNavbarOptions(isEdit=false) {
         let navContainer = document.querySelector('ul.navbar-nav')
         navContainer.innerHTML = res
         executeScript(navContainer)
-    }
-}
-
-window.onload = () => {
-    getNavbarOptions()
-}
-
-xmlhttp = new XMLHttpRequest()
-xmlhttp.onreadystatechange = () => {
-    if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
-        let main = document.querySelector('main')
-        main.innerHTML = xmlhttp.responseText
-        executeScript(main)
-
-        manageCodeEditor()
     }
 }
 

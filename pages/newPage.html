@@ -1,29 +1,29 @@
 <div class="d-flex flex-column justify-content-center align-items-center w-100" style="flex:1">
-    <form onsubmit="createPage(event)" class="d-flex w-50">
-      <input id="pageName" placeholder="enter the new page name" type="text" class="form-control" style="flex: 75%;"/>
-      <button type="submit" style="flex: 25%;">Create new page</button>
-    </form>
-  </div>
-  <script>
-    function createPage(e) {
-      e.preventDefault()
-      let pageName = document.querySelector('#pageName').value
-      fetch('http://localhost:3000/api/pages/' + pageName, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            isNavbarOption: true
-        })
+  <form onsubmit="createPage(event)" class="d-flex w-50">
+    <input id="pageName" placeholder="enter the new page name" type="text" class="form-control" style="flex: 75%;"/>
+    <button type="submit" style="flex: 25%;">Create new page</button>
+  </form>
+</div>
+<script>
+  function createPage(e) {
+    e.preventDefault()
+    let pageName = document.querySelector('#pageName').value
+    fetch('http://localhost:3000/api/pages/' + pageName, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          isNavbarOption: true
       })
-      .then(res => res.text())
-      .then(res => {
-        let main = document.querySelector('main')
-        main.innerHTML = xmlhttp.responseText
+    })
+    .then(res => res.text())
+    .then(res => {
+      let main = document.querySelector('main')
+      main.innerHTML = res
 
-        getNavbarOptions()
-      })
+      getNavbarOptions()
+    })
 
-    }
-  </script>
+  }
+</script>
