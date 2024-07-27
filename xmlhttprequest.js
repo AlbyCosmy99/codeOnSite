@@ -40,6 +40,10 @@ export function getNavbarOptions(isEdit=false, cancel = false) {
         
         if(sessionStorage.getItem('currentPage') != 'htmlEditor' || cancel) {
             changeComponent('welcomeEdit', false, null, isEdit)
+            if(cancel) {
+                sessionStorage.removeItem('currentCode')
+                clearInterval(intervalCurrentCode)
+            }
         }
     }
     else {
