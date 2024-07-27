@@ -4,6 +4,9 @@ window.onload = () => {
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
         changeComponent(currentPage)
+        if(currentPage === 'welcomeEdit') {
+            getNavbarOptions(true)
+        }
     }
     else {
         changeComponent('welcome')
