@@ -41,7 +41,7 @@ function getNavbarOptions(isEdit=false) {
 }
 
 function changeComponent(page, fromEditor=false, pageToEditor=null, isEdit=false) {
-    xmlhttp.open('GET', BACKEND + 'pages/' + page, true)
+    xmlhttp.open('GET', BACKEND + 'api/pages/' + page, true)
     xmlhttp.setRequestHeader('Content-Type', 'text/html');
     xmlhttp.send()
     
