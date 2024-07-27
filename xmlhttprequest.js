@@ -3,9 +3,12 @@ import BACKEND from './consts.js'
 window.onload = () => {
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
-        changeComponent(currentPage)
         if(currentPage === 'welcomeEdit') {
+            changeComponent(currentPage,false,null,true)
             getNavbarOptions(true)
+        }
+        else {
+            changeComponent(currentPage)
         }
     }
     else {

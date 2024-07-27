@@ -46,8 +46,6 @@
         }
 
         window.deleteOption = function deleteOption(option) {
-            console.log('delete ' + option)
-
             fetch(BACKEND + 'api/pages/' + option, {
                 method: 'DELETE'
             })
