@@ -1,7 +1,7 @@
 <div class="d-flex flex-column justify-content-center align-items-center w-100" style="flex:1">
-  <form onsubmit="createPage(event)" class="d-flex w-50">
-    <input id="pageName" placeholder="enter the new page name" type="text" class="form-control" style="flex: 75%; border: 5px solid green;"/>
-    <button type="submit" style="flex: 25%;background-color: green; color: white; border-radius: 10%;">Create new page</button>
+  <form id="newPageForm" onsubmit="createPage(event)" class="d-flex flex-column">
+    <input id="pageName" placeholder="enter the new page name" type="text" class="form-control m-0" style="flex: 75%; border: 5px solid green;"/>
+    <button class="mt-2" type="submit" style="flex: 25%;background-color: green; color: white;">Create new page</button>
   </form>
 </div>
 <script>
@@ -33,3 +33,16 @@
     console.log('error in newPage. Cannot import BACKEND url.')
   }) 
 </script>
+
+<style scoped>
+
+  #newPageForm {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 1000px) {
+    #newPageForm {
+      width: 80%;
+    }
+}
+</style>

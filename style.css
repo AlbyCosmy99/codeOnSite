@@ -26,3 +26,31 @@ nav button {
 input::placeholder {
     color: #aaa;
 }
+
+@media screen and (max-width: 1000px) {
+    .container-fluid {
+        margin-top: 0.2rem;
+        padding: 0.4rem;
+    }
+
+    ul.navbar-nav {
+        text-align: center;
+    }
+
+    ul.navbar-nav li.nav-item button {
+        width: 50%;
+    }
+
+    .navbar-collapse {
+        margin-top: 0.8rem;
+    }
+
+    nav.navbar {
+        margin: 0.3rem !important;
+    }
+
+    a.navbar-brand {
+        text-align: center;
+        flex: 1;
+    }
+}
