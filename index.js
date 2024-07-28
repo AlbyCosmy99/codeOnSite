@@ -20,8 +20,19 @@ window.onload = () => {
         document.querySelector('a.navbar-brand').innerText = sessionStorage.getItem('title')
     }
 
+    let defaultTitle = 'Custom pages'
+
     document.querySelector('a.navbar-brand').addEventListener('click', () => {
-        document.querySelector('a.navbar-brand').innerText = 'Custom pages'
+        document.querySelector('a.navbar-brand').innerText = defaultTitle
+        sessionStorage.setItem('title', defaultTitle)
+    })
+    document.querySelector('svg#editIcon').addEventListener('click', () => {
+        document.querySelector('a.navbar-brand').innerText = defaultTitle
+        sessionStorage.setItem('title', defaultTitle)
+    })
+    document.querySelector('svg#createIcon').addEventListener('click', () => {
+        document.querySelector('a.navbar-brand').innerText = defaultTitle
+        sessionStorage.setItem('title', defaultTitle)
     })
 }
 
