@@ -73,10 +73,16 @@ export function changeComponent(page, fromEditor=false, pageToEditor=null, isEdi
         localStorage.setItem('pageToEditor', pageToEditor)
     }
 
-    const navbarContent = document.getElementById('navbarSupportedContent');
-    if(navbarContent.classList.contains('show')) {
-        document.getElementsByClassName('navbarToggler').click()
+    const navbarContent = document.getElementById('navbarSupportedContent')
+    if (page != 'welcomeEdit' && navbarContent && navbarContent.classList.contains('show')) {
+        const navbarToggler = document.querySelector('button.navbar-toggler')
+        if (navbarToggler) {
+            navbarToggler.click()
+        } else {
+            console.warn('Navbar toggler button is not found.')
+        }
     }
+
 }
 
 export function executeScript(node) {
