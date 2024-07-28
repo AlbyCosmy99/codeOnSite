@@ -15,6 +15,14 @@ window.onload = () => {
         changeComponent('welcome')
         getNavbarOptions()
     } 
+
+    if(sessionStorage.getItem('title')) {
+        document.querySelector('a.navbar-brand').innerText = sessionStorage.getItem('title')
+    }
+
+    document.querySelector('a.navbar-brand').addEventListener('click', () => {
+        document.querySelector('a.navbar-brand').innerText = 'Custom pages'
+    })
 }
 
 let xmlhttp = new XMLHttpRequest()

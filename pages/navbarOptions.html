@@ -15,6 +15,14 @@
                     </li>
                     `;
                 }).join('');
+
+                let options = document.querySelectorAll('li.nav-item')
+                for(let i = 0; i<options.length; i++) {
+                    options[i].addEventListener('click', () => {
+                        document.querySelector('a.navbar-brand').innerText = res[i].name
+                        sessionStorage.setItem('title', res[i].name)
+                    })
+                }
             });
     });
 </script>
