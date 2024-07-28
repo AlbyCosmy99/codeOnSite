@@ -30,6 +30,7 @@ input::placeholder {
 @media screen and (max-width: 1000px) {
     .container-fluid {
         margin-top: 0.2rem;
+        padding: 0.4rem;
     }
 
     ul.navbar-nav {
