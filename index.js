@@ -72,6 +72,11 @@ export function changeComponent(page, fromEditor=false, pageToEditor=null, isEdi
     if(fromEditor) {
         localStorage.setItem('pageToEditor', pageToEditor)
     }
+
+    const navbarContent = document.getElementById('navbarSupportedContent');
+    if(navbarContent.classList.contains('show')) {
+        document.getElementsByClassName('navbarToggler').click()
+    }
 }
 
 export function executeScript(node) {
