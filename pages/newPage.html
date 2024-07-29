@@ -29,6 +29,7 @@
       .then(res => {
         let main = document.querySelector('main')
         main.innerHTML = res
+        sessionStorage.setItem('pageCreated', pageName)
 
         getNavbarOptions()
       })
