@@ -47,27 +47,29 @@ xmlhttp.onreadystatechange = () => {
 }
 
 export function getNavbarOptions(isEdit=false, cancel = false) {
-    if(isEdit) {
+    if(isEdit && sessionStorage.getItem('navbarComponent') === 'navbarOptions') {
         fetch(BACKEND + `api/pages/navbarEditOptions`)
         .then(response => response.text())
         .then(res => {
             renderOptions(res)
+            sessionStorage.setItem('navbarComponent', 'navbarEditOptions')
         })
-        
-        if(sessionStorage.getItem('currentPage') != 'htmlEditor' || cancel) {
-            changeComponent('welcomeEdit', false, null, isEdit)
-            if(cancel) {
-                sessionStorage.removeItem('currentCode')
-                clearInterval(intervalCurrentCode)
-            }
-        }
     }
     else {
         fetch(BACKEND + `api/pages/navbarOptions`)
         .then(response => response.text())
         .then(res => {
             renderOptions(res)
+            sessionStorage.setItem('navbarComponent', 'navbarOptions')
         })
+    }
+    
+    if(sessionStorage.getItem('currentPage') != 'htmlEditor' || cancel) {
+        changeComponent('welcomeEdit', false, null, isEdit)
+        if(cancel) {
+            sessionStorage.removeItem('currentCode')
+            clearInterval(intervalCurrentCode)
+        }
     }
 
     function renderOptions(res) {
