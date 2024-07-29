@@ -8,16 +8,21 @@
   import('./consts.js').then(module => {
     const BACKEND = module.default 
 
-    window.createPage = function createPage(e) {
+    window.createPage = async function createPage(e) {
       e.preventDefault()
       let pageName = document.querySelector('#pageName').value
+
+      let res = await fetch(BACKEND + 'api/pages/pageJustCreated')
+      let html = await res.text()
+
       fetch(BACKEND + 'api/pages/' + pageName, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            isNavbarOption: true
+            isNavbarOption: true,
+            html: html
         })
       })
       .then(res => res.text())
