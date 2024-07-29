@@ -47,7 +47,7 @@ xmlhttp.onreadystatechange = () => {
 }
 
 export function getNavbarOptions(isEdit=false, cancel = false) {
-    if(isEdit && sessionStorage.getItem('navbarComponent') === 'navbarOptions') {
+    if(isEdit && (!sessionStorage.getItem('navbarComponent') || sessionStorage.getItem('navbarComponent') === 'navbarOptions')) {
         fetch(BACKEND + `api/pages/navbarEditOptions`)
         .then(response => response.text())
         .then(res => {
