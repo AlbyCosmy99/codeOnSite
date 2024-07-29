@@ -54,6 +54,13 @@ export function getNavbarOptions(isEdit=false, cancel = false) {
             renderOptions(res)
             sessionStorage.setItem('navbarComponent', 'navbarEditOptions')
         })
+        if(sessionStorage.getItem('currentPage') != 'htmlEditor' || cancel) {
+            changeComponent('welcomeEdit', false, null, isEdit)
+            if(cancel) {
+                sessionStorage.removeItem('currentCode')
+                clearInterval(intervalCurrentCode)
+            }
+        }
     }
     else {
         fetch(BACKEND + `api/pages/navbarOptions`)
@@ -64,13 +71,6 @@ export function getNavbarOptions(isEdit=false, cancel = false) {
         })
     }
     
-    if(sessionStorage.getItem('currentPage') != 'htmlEditor' || cancel) {
-        changeComponent('welcomeEdit', false, null, isEdit)
-        if(cancel) {
-            sessionStorage.removeItem('currentCode')
-            clearInterval(intervalCurrentCode)
-        }
-    }
 
     function renderOptions(res) {
         let navContainer = document.querySelector('ul.navbar-nav')
