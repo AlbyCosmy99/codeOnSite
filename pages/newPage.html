@@ -1,8 +1,9 @@
 <div class="d-flex flex-column justify-content-center align-items-center w-100" style="flex:1">
   <form id="newPageForm" onsubmit="createPage(event)" class="d-flex flex-column">
-    <input id="pageName" placeholder="enter the new page name" type="text" class="form-control m-0" style="flex: 75%; border: 5px solid green;"/>
+    <input id="pageName" placeholder="enter the new page name" type="text" oninput="hideEmptyNameMessage()" class="form-control m-0" style="flex: 75%; border: 5px solid green;"/>
     <button class="mt-2" type="submit" style="flex: 25%;background-color: green; color: white; padding: 1rem;">Create new page</button>
   </form>
+  <h6 class="text-center mt-1 d-none" id="emptyNameMessage" style="color: red;">Insert a valid page name to continue</h6>
 </div>
 <script>
   import('./consts.js').then(module => {
@@ -11,6 +12,11 @@
     window.createPage = async function createPage(e) {
       e.preventDefault()
       let pageName = document.querySelector('#pageName').value
+
+      if(!pageName) {
+        document.querySelector('#emptyNameMessage').classList.remove('d-none');
+        return
+      }
 
       let res = await fetch(BACKEND + 'api/pages/pageJustCreated')
       let html = await res.text()
@@ -38,6 +44,10 @@
   .catch(err => {
     console.log('error in newPage. Cannot import BACKEND url.')
   }) 
+
+  function hideEmptyNameMessage() {
+    document.querySelector('#emptyNameMessage').classList.add('d-none');
+  }
 </script>
 
 <style scoped>
