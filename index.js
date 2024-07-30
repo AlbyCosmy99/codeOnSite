@@ -1,5 +1,16 @@
 import BACKEND from './consts.js'
 
+// Funzione per ottenere il cookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+// Utilizzo
+const exampleCookieValue = getCookie('exampleCookie');
+console.log(exampleCookieValue); // Output: 'value'
+  
+
 window.onload = () => {
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
