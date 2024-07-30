@@ -30,7 +30,7 @@
         let main = document.querySelector('main')
         main.innerHTML = res
         sessionStorage.setItem('pageCreated', pageName)
-
+        sessionStorage.setItem('currentPage', pageName)
         getNavbarOptions()
       })
     }
