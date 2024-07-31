@@ -1,16 +1,5 @@
 import BACKEND from './consts.js'
 
-// Funzione per ottenere il cookie
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  }
-// Utilizzo
-const exampleCookieValue = getCookie('exampleCookie');
-console.log(exampleCookieValue); // Output: 'value'
-  
-
 window.onload = () => {
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
@@ -54,6 +43,13 @@ xmlhttp.onreadystatechange = () => {
         main.innerHTML = xmlhttp.responseText
         executeScript(main)
         manageCodeEditor()
+    }
+    else {
+        console.log('loading...')
+        let main = document.querySelector('main')
+        main.innerHTML = `<div class="d-flex justify-content-center align-items-center gap-2" style="flex: 1;">
+                            <div class="spinner-border text-success" role="status"></div><p class="m-0" style="color:green">Loading...wait some seconds</p>
+                         </div>`
     }
 }
 
