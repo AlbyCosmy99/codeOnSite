@@ -1,6 +1,7 @@
 import BACKEND from './consts.js'
 
 window.onload = () => {
+    sessionStorage.setItem('loading', '0')
     let currentPage = sessionStorage.getItem('currentPage')
     if(currentPage) {
         if(currentPage === 'welcomeEdit') {
@@ -37,19 +38,32 @@ window.onload = () => {
 }
 
 let xmlhttp = new XMLHttpRequest()
+let loadingInterval = null;
 xmlhttp.onreadystatechange = () => {
     if(xmlhttp.readyState===4 && xmlhttp.status === 200) {
+        sessionStorage.setItem('loading', '0')
+        if(loadingInterval) {
+            clearTimeout(loadingInterval)
+        }
         let main = document.querySelector('main')
         main.innerHTML = xmlhttp.responseText
         executeScript(main)
         manageCodeEditor()
     }
     else {
-        console.log('loading...')
-        let main = document.querySelector('main')
-        main.innerHTML = `<div class="d-flex justify-content-center align-items-center gap-2" style="flex: 1;">
-                            <div class="spinner-border text-success" role="status"></div><p class="m-0" style="color:green">Loading...wait some seconds</p>
-                         </div>`
+        if(!sessionStorage.getItem('loading')) {
+            sessionStorage.setItem('loading', '0')
+        }
+        if(!parseInt(sessionStorage.getItem('loading'))) {
+            sessionStorage.setItem('loading', '1')
+            loadingInterval = setTimeout(() => {
+                console.log('loading...')
+                let main = document.querySelector('main')
+                main.innerHTML = `<div class="d-flex justify-content-center align-items-center gap-2" style="flex: 1;">
+                                    <div class="spinner-border text-success" role="status"></div><p class="m-0" style="color:green">Loading...wait some seconds</p>
+                                </div>`
+            },2000)
+        }
     }
 }
 
